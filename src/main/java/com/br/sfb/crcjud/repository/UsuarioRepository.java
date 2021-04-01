@@ -14,7 +14,7 @@ import com.br.sfb.crcjud.entities.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
 	public Optional<Usuario> findByEmail(String email);
 
-	public List<Usuario> findByCodigoIn(Long[] codigos);
+	public List<Usuario> findByIdIn(Long[] codigos);
 	
 	@Query("select distinct p.nome from Usuario u inner join u.grupos g inner join g.permissoes p where u = :usuario")
 	public List<String> permissoes(Usuario usuario);

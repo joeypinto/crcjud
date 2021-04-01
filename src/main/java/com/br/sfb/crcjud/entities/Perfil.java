@@ -14,8 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "grupo")
-public class Grupo implements Serializable {
+@Table(name = "perfil")
+public class Perfil implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,14 +26,14 @@ public class Grupo implements Serializable {
 	private String nome;
 
 	@ManyToMany
-	@JoinTable(name = "grupo_permissao", joinColumns = @JoinColumn(name = "codigo_grupo"), inverseJoinColumns = @JoinColumn(name = "codigo_permissao"))
+	@JoinTable(name = "perfil_permissao", joinColumns = @JoinColumn(name = "id_perfil"), inverseJoinColumns = @JoinColumn(name = "id_permissao"))
 	private List<Permissao> permissoes;
 
-	public Long getCodigo() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setCodigo(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

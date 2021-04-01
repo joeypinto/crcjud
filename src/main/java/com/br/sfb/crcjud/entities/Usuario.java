@@ -32,7 +32,7 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private Long id;
 
 	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
@@ -48,21 +48,21 @@ public class Usuario implements Serializable {
 
 	@Size(min = 1, message = "Selecione pelo menos um grupo")
 	@ManyToMany
-	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "codigo_usuario")
-				, inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))	
+	@JoinTable(name = "usuario_perfil", joinColumns = @JoinColumn(name = "codigo_usuario")
+				, inverseJoinColumns = @JoinColumn(name = "codigo_perfil"))	
 	
-	private List<Grupo> grupos;
+	private List<Perfil> grupos;
 
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
 
 	
 	public Long getCodigo() {
-		return codigo;
+		return id;
 	}
 
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
+	public void setCodigo(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -105,39 +105,12 @@ public class Usuario implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public List<Grupo> getGrupos() {
+	public List<Perfil> getGrupos() {
 		return grupos;
 	}
 
-	public void setGrupos(List<Grupo> grupos) {
+	public void setGrupos(List<Perfil> grupos) {
 		this.grupos = grupos;
-	}
-
-	
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		return true;
-	}
+	}	
 
 }

@@ -36,29 +36,29 @@
                     </a>
 
                     <div class="nav__list">
-                        <a href="#" class="nav__link active">
+                        <a th:href="@{/home}" th:classappend="${#request.requestURI.startsWith('/home') ? 'active':''}" class="nav__link">
                         <i class='bx bx-grid-alt nav__icon' ></i>
                             <span class="nav__name">Dashboard</span>
                         </a>
 
-                        <a href="#" class="nav__link">
+                        <a th:href="@{/usuario}" th:classappend="${#request.requestURI.startsWith('/usuario') ? 'active':''}" class="nav__link">
                             <i class='bx bx-user nav__icon' ></i>
-                            <span class="nav__name">Users</span>
+                            <span class="nav__name" >Usuario</span>
                         </a>
                         
-                        <a href="#" class="nav__link">
+                        <a th:href="@{/entidade/list}" th:classappend="${#request.requestURI.startsWith('/entidade/list') ? 'active':''}" class="nav__link">
                             <i class='bx bx-message-square-detail nav__icon' ></i>
-                            <span class="nav__name">Messages</span>
+                            <span class="nav__name">Entidades</span>
                         </a>
 
-                        <a href="#" class="nav__link">
+                        <a th:href="@{/perfis/list}" th:classappend="${#request.requestURI.startsWith('/perfis/list') ? 'active':''}" class="nav__link">
                             <i class='bx bx-bookmark nav__icon' ></i>
-                            <span class="nav__name">Favorites</span>
+                            <span class="nav__name">Perfis</span>
                         </a>
 
-                        <a href="#" class="nav__link">
+                        <a th:href="@{/vara}" th:classappend="${#request.requestURI.startsWith('/vara') ? 'active':''}" class="nav__link">
                             <i class='bx bx-folder nav__icon' ></i>
-                            <span class="nav__name">Data</span>
+                            <span class="nav__name">Varas</span>
                         </a>
 
                         <a href="#" class="nav__link">
