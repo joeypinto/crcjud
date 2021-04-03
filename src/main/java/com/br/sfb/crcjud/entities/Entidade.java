@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="entidade")
@@ -17,11 +19,12 @@ public class Entidade implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+	@NotBlank(message = "Nome é Obrigatorio")
 	private String nome;
 	private String email;
 	private String telefone;
 	private String endereco;
+	@NotNull(message = "É necessario informar a comarca")
 	@ManyToOne
 	private Cidade cidade;
 	

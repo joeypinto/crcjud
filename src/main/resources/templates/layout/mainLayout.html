@@ -21,10 +21,6 @@
             <div class="header__toggle">
                 <i class='bx bx-menu' id="header-toggle"></i>
             </div>
-
-            <div class="header__img">
-                <img src="img/perfil.jpg" alt="">
-            </div>
         </header>
 
         <div class="l-navbar" id="nav-bar">
@@ -41,12 +37,12 @@
                             <span class="nav__name">Dashboard</span>
                         </a>
 
-                        <a th:href="@{/usuario}" th:classappend="${#request.requestURI.startsWith('/usuario') ? 'active':''}" class="nav__link">
+                        <a th:href="@{/usuarios}" th:classappend="${#request.requestURI.startsWith('/usuarios') ? 'active':''}" class="nav__link">
                             <i class='bx bx-user nav__icon' ></i>
                             <span class="nav__name" >Usuario</span>
                         </a>
                         
-                        <a th:href="@{/entidade/list}" th:classappend="${#request.requestURI.startsWith('/entidade/list') ? 'active':''}" class="nav__link">
+                        <a th:href="@{/entidades/list}" th:classappend="${#request.requestURI.startsWith('/entidades/list') ? 'active':''}" class="nav__link">
                             <i class='bx bx-message-square-detail nav__icon' ></i>
                             <span class="nav__name">Entidades</span>
                         </a>
@@ -56,7 +52,7 @@
                             <span class="nav__name">Perfis</span>
                         </a>
 
-                        <a th:href="@{/vara}" th:classappend="${#request.requestURI.startsWith('/vara') ? 'active':''}" class="nav__link">
+                        <a th:href="@{/varas/list}" th:classappend="${#request.requestURI.startsWith('/varas') ? 'active':''}" class="nav__link">
                             <i class='bx bx-folder nav__icon' ></i>
                             <span class="nav__name">Varas</span>
                         </a>

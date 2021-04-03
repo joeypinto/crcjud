@@ -18,70 +18,70 @@
 				src="https://image.freepik.com/vetores-gratis/ilustracao-do-conceito-de-juiz_114360-1710.jpg"
 				width="100%">
 		</div>
-
-
-
-		<form action="#" th:action="@{/perfis}" method="post"
-			style="margin: 40px;">
+		<h1 style="text-align: center;"
+			th:text="${usuario.id} ? 'Editar de Usuario' : 'Cadastro de Usuarios'"></h1>
+		<form action="#" th:action="@{/usuarios}" method="post"
+			th:object="${usuario}" style="margin: 40px;">
+			<ul th:if="${#fields.hasErrors('*')}">
+				<li th:each="error : ${#fields.errors('*')}" th:text="${error}">error</li>
+			</ul>
 			<input type="hidden" />
 			<div class="form-group">
 				<div class="form-column">
 					<p>Nome do Perfil:</p>
-					<input type="text" style="width: 100%">
+					<input type="text" style="width: 100%" th:field="*{nome}">
+					<div class="alert alert-warning"
+						th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
 				</div>
 				<div class="form-column">
 					<p>CPF:</p>
-					<input type="text" style="width: 100%">
+					<input type="text" id="cpf" onkeypress="getCpf(cpf)"
+						style="width: 100%" th:field="*{cpf}">
 				</div>
 				<div class="form-column">
 					<p>E-mail:</p>
-					<input type="text" style="width: 100%">
+					<input type="text" style="width: 100%" th:field="*{email}">
 				</div>
 				<div class="form-column">
 					<p>Telefone:</p>
-					<input type="text" style="width: 100%">
+					<input type="text" style="width: 100%" th:field="*{telefone}">
 				</div>
 				<div class="form-column">
 					<p>UF:</p>
-					<select id="comboCidade" name="cidade">
-						<option value="0">Selecione a cidade</option>
+					<select id="comboUf" onchange="getComboCidade(comboUf)" name="uf">
+						<option value="0">Selecione a Estado</option>
+						<option th:if="${usuario.cidade}" th:each="uf : ${ufs}"
+							th:value="${uf.id}" th:text="${uf.nome_uf}"
+							th:selected="${#lists.contains(usuario.cidade.estados,uf)}" />
+						<option th:unless="${usuario.cidade}" th:each="uf : ${ufs}"
+							th:value="${uf.id}" th:text="${uf.nome_uf}" />
 					</select>
 				</div>
 				<div class="form-column">
 					<p>Comarca:</p>
-					<select id="comboCidade" name="cidade">
+					<select id="comboCidade" onchange="getVara(comboCidade)"
+						th:field="*{cidade}" th:disabled="!${usuario.cidade}">
 						<option value="0">Selecione a cidade</option>
+						<option th:if="${usuario.cidade}" th:value="${usuario.cidade.id}"
+							th:text="${usuario.cidade.nome_municipio}"></option>
 					</select>
 				</div>
 			</div>
 			<div class="form-column">
 				<p>Vara:</p>
-						<select id="comboCidade"  name="cidade">
-							<option value="0">Selecione a cidade</option>
-						</select>
+				<select id="comboVara" name="vara" th:field="*{vara}" th:disabled="!${usuario.vara}">
+					<option value="0">Selecione a Vara</option>
+					<option th:if="${usuario.vara}" th:value="${usuario.vara.id}"
+							th:text="${usuario.vara.nome}"></option>
+				</select>
 			</div>
-					<fieldset class="form-column" style="width: 100%">
+			<fieldset class="form-column" style="width: 100%; margin-top: 20px;">
 				<legend>Indique os Perfil:</legend>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				<div><input type="checkbox" value="Teste"> <label for="permissao">gd</label></div>
-				
-
+				<div th:each="perfil : ${perfis}">
+					<input type="checkbox" th:value="${perfil.id}" th:field="*{perfis}">
+					<label for="perfil" th:text="${perfil.nome}"></label>
+				</div>
 			</fieldset>
-
 			<button type="submit" class="btn btn-primary">Salvar</button>
 			<button type="submit" class="btn btn-danger">excluir</button>
 		</form>

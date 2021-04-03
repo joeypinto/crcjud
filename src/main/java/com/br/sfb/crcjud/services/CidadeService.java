@@ -19,8 +19,7 @@ public class CidadeService {
 	public List<Cidade> findAllUf(Long uf) {		
 		return cidadeRepository.findByEstadosId(uf);
 	}
-	public Cidade findById(long id) {
-		
+	public Cidade findById(long id) {		
 		return cidadeRepository.findById(id).get();
 	}
 }

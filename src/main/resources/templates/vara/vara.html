@@ -15,45 +15,49 @@
 	<div class="card-conteudo grid-conteudo">
 		<div class="img-form">
 			<img alt=""
-				src="https://image.freepik.com/vetores-gratis/ilustracao-do-conceito-de-juiz_114360-1710.jpg"
+				src="https://image.freepik.com/vetores-gratis/ilustracao-do-conceito-de-juiz_114360-2189.jpg"
 				width="100%">
 		</div>
 
-		<form action="#" th:action="@{/varas}" method="post"
-			style="margin: 40px;">
-			<input type="hidden" />
+		<form  th:action="@{/varas}" method="post"
+			style="margin: 40px;" th:object="${vara}">
+				 <ul th:if="${#fields.hasErrors('*')}">
+                    <li th:each="error : ${#fields.errors('*')}" th:text="${error}">error</li>
+             </ul>
+			<input type="hidden" th:field="*{id}" />
 			<div class="form-column">
-				<p>Nome do Perfil:</p>
-				<input type="text" style="width: 100%">
+				<p>Nome da Vara:</p>
+				<input type="text" style="width: 100%" th:field="*{nome}">
 			</div>
 			<div class="form-group">
 				<div class="form-column">
 					<p>UF:</p>
-					<select id="mySelect" onchange="getComboA(mySelect)" name="uf">
-						<option value="0">Selecione a cidade</option>
-						<option th:each="uf : ${ufs}" th:value="${uf.id}"
-							th:text="${uf.nome_uf}" />
+					<select id="comboUf" onchange="getComboCidade(comboUf)" name="uf">
+						<option value="0">Selecione a Estado</option>
+						<option th:if="${vara.cidade}" th:each="uf : ${ufs}"
+							th:value="${uf.id}" th:text="${uf.nome_uf}"
+							th:selected="${#lists.contains(vara.cidade.estados,uf)}" />
+						<option th:unless="${vara.cidade}" th:each="uf : ${ufs}"
+							th:value="${uf.id}" th:text="${uf.nome_uf}" />
 					</select>
 				</div>
 				<div class="form-column">
 					<p>Comarca:</p>
-					<select id="comboCidade" name="cidade"
-						disabled="disabled">
-<!-- 						<option th:if="${entidade.cidade}" -->
-<!-- 							th:value="${entidade.cidade.id}" -->
-<!-- 							th:text="${entidade.cidade.nome_municipio}"></option> -->
-						<!-- <option data-th-each="cidade : ${cidades}" -->
-						<!-- 								th:value="${cidade.id}" th:text="${cidade.nome}" /> -->
+					<select id="comboCidade" name="cidade" th:field="*{cidade}"
+						th:disabled="!${vara.cidade}">
+						<option th:if="${vara.cidade}" th:value="${vara.cidade.id}"
+							th:text="${vara.cidade.nome_municipio}"></option>
+
 					</select>
 				</div>
 			</div>
 			<div class="form-column">
 				<p>Entidade:</p>
-				<select id="select-entidade" name="entidade">
-						<option value="0">Selecione a Entidade</option>
-						<option th:each="entidade : ${entidades}" th:value="${entidade.id}"
-							th:text="${entidade.nome}" />
-					</select>
+				<select id="select-entidade" name="entidade" th:field="*{entidade}">
+					<option value="0">Selecione a Entidade</option>
+					<option th:each="entidade : ${entidades}" th:value="${entidade.id}"
+						th:text="${entidade.nome}" />
+				</select>
 			</div>
 
 

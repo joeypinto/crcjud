@@ -3,42 +3,37 @@ package com.br.sfb.crcjud.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.br.sfb.crcjud.entities.Entidade;
 import com.br.sfb.crcjud.entities.Usuario;
 import com.br.sfb.crcjud.repository.UsuarioRepository;
 
 @Service
-public class UsuarioService implements IGenericService<Usuario> {
+public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	@Override
+
 	public List<Usuario> findAll() {		
 		return usuarioRepository.findAll();
 	}
-	@Override
+
 	public Usuario save(Usuario usuario) {		
 		return usuarioRepository.save(usuario);
 	}
-	@Override
-	public Usuario findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+
+	public Usuario findById(long id) {	
+		return usuarioRepository.findById(id).get();
 	}
-	@Override
-	public void delete(Usuario entity) {
-		// TODO Auto-generated method stub
-		
+
+	public Page<Usuario> findAllPageable(Pageable pageable) {
+		return usuarioRepository.findAll(pageable);
 	}
-	@Override
-	public void deleteById(long id) {
-		// TODO Auto-generated method stub
-		
+	public Page<Entidade> findNamePageable(String nome,Pageable pageable) {		
+		return usuarioRepository.findByNomeContaining(nome, pageable);
 	}
-	@Override
-	public long count() {
-		return 0;
-	}
-	
+
 }

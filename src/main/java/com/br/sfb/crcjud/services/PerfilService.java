@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.br.sfb.crcjud.entities.Perfil;
-import com.br.sfb.crcjud.repository.PerfilPageRepository;
+import com.br.sfb.crcjud.repository.PerfilRepository;
 
 @Service
 public class PerfilService{
 
 @Autowired
-private PerfilPageRepository perfilPageRepository;
+private PerfilRepository perfilPageRepository;
 
 	public Iterable<Perfil> findAllPageable(Pageable pageable) {		
 		return perfilPageRepository.findAll(pageable);

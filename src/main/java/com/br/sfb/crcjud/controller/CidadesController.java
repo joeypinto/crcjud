@@ -15,14 +15,14 @@ import com.br.sfb.crcjud.services.CidadeService;
 
 @Controller
 @RequestMapping("cidades")
-public class CidadeController {
+public class CidadesController {
 @Autowired
 private CidadeService cidadeService;
 
     @GetMapping()
     @ResponseBody()
     @Cacheable("cidade")
-    public List<Cidade> cidadesAll(@RequestParam(name = "id", defaultValue = "-1") Long id) {    	
+    public List<Cidade> cidadesFindUf(@RequestParam(name = "id", defaultValue = "-1") Long id) {    	
     	System.out.println(id);
     	List<Cidade> cidade = cidadeService.findAllUf(id);
     	System.out.println(cidade);

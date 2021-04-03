@@ -16,10 +16,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import org.hibernate.annotations.DynamicUpdate;
 
 
@@ -36,34 +39,31 @@ public class Usuario implements Serializable {
 
 	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
-
 	@NotBlank(message = "E-mail é obrigatório")
 	@Email(message = "E-mail inválido")
 	private String email;
-
+	@NotNull(message = "É necessario informar um cpf")
+	private String cpf;
+	private String telefone;
+	@NotNull(message = "É necessario informar uma senha")
 	private String senha;
-	
+	@NotNull(message = "É necessario informar a vara")
+	@ManyToOne
+	private Vara vara;
+	@NotNull(message = "É necessario informar a comarca")
+	@ManyToOne
+	private Cidade cidade;
 	
 	private Boolean ativo;
 
-	@Size(min = 1, message = "Selecione pelo menos um grupo")
+	@Size(min = 1, message = "Selecione pelo menos pelo um perfil")	
 	@ManyToMany
 	@JoinTable(name = "usuario_perfil", joinColumns = @JoinColumn(name = "codigo_usuario")
 				, inverseJoinColumns = @JoinColumn(name = "codigo_perfil"))	
-	
-	private List<Perfil> grupos;
+	private List<Perfil> perfis;
 
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
-
-	
-	public Long getCodigo() {
-		return id;
-	}
-
-	public void setCodigo(Long id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;
@@ -105,12 +105,56 @@ public class Usuario implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public List<Perfil> getGrupos() {
-		return grupos;
+	public List<Perfil> getPerfis() {
+		return perfis;
 	}
 
-	public void setGrupos(List<Perfil> grupos) {
-		this.grupos = grupos;
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
+	}
+
+	public void setGrupos(List<Perfil> perfis) {
+		this.perfis = perfis;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Vara getVara() {
+		return vara;
+	}
+
+	public void setVara(Vara vara) {
+		this.vara = vara;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}	
 
 }

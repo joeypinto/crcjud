@@ -6,17 +6,18 @@
 	layout:decorate="~{layout/mainLayout}">
 
 <head>
-<title>Lista de Perfis</title>
+<title>Lista de Entidades</title>
 </head>
 
 <section layout:fragment="conteudo">
 	<div class="card-conteudo">
-		<h1 style="text-align: center;">Lista de Perfis</h1>
-		<a class="btn btn-primary" th:href="@{/entidade}">Novo Perfil</a>
-		<form action="#" th:action="@{/entidade/serch}" method="post"
+		<h1 style="text-align: center;">Lista de Entidades</h1>
+		<a class="btn btn-primary" th:href="@{/entidades}">Nova Entidade</a>
+		<form  th:action="@{/entidades/search}" method="post"
 			style="margin: 40px;">
+
 			<div class="form-column">
-				<p>Nome do Perfil:</p>
+				<p>Nome do Entidade:</p>
 				<input type="text" style="width: 90%" name="nome">
 				<button class="btn btn-primary" type="submit">Pesquisar</button>
 			</div>
@@ -39,7 +40,7 @@
 					<td th:text="${entidade.email}"></td>
 					<td th:text="${entidade.cidade.nome_municipio}"></td>
 					<td th:text="${entidade.cidade.estados.nome_uf}"></td>
-					<td style="width: 15px;"><a class="btn btn-primary" th:href="@{/entidade/{id}(id=${entidade.id})}">Editar</a></td>
+					<td style="width: 15px;"><a class="btn btn-primary" th:href="@{/entidades/{id}(id=${entidade.id})}">Editar</a></td>
 				</tr>
 			</tbody>
 		</table>
